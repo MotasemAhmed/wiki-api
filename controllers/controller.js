@@ -1,4 +1,5 @@
 const Article = require("../models/article");
+const { update } = require("d:/iti/njs/server/controllers/todo-ctrl");
 
 exports.GetAllArticles = (req, res) => {
   Article.find({}, (err, foundArticles) => {
@@ -46,6 +47,26 @@ exports.GetArticle = (req, res) => {
   });
 };
 
-exports.UpdateArticle = (req, res) => {};
+exports.UpdateArticle = (req, res) => {
+  Article.findOneAndUpdate(
+    { title: req.params.articleTitle },
+    { $set: req.body },
+    (err) => {
+      if (!err) {
+        res.send("Successfully Updated");
+      } else {
+        res.send(err);
+      }
+    }
+  );
+};
 
-exports.DeleteArticle = (req, res) => {};
+exports.DeleteArticle = (req, res) => {
+  Article.findOneAndRemove({ title: req.params.articleTitle }, (err) => {
+    if (!err) {
+      res.send("Successfully Deleted");
+    } else {
+      res.send(err);
+    }
+  });
+};

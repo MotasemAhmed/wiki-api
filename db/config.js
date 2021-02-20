@@ -6,6 +6,7 @@ dotenv.config();
 connectionOptions = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  useFindAndModify: false,
 };
 
 mongoose
